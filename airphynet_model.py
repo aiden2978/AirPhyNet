@@ -146,10 +146,10 @@ class Encoder_z0_RNN(nn.Module, EncoderAttrs):
             # shape of outputs: (seq_len, batch, num_senor * rnn_units)
             seq_len, batch_size = inputs.size(0), inputs.size(1)
             inputs = inputs.reshape(seq_len, batch_size, self.num_nodes, self.input_var)
-            inputs = inputs.reshape(seq_len, batch_size * self.num_nodes, self.input_var) #(24, 1120, 6)
+            inputs = inputs.reshape(seq_len, batch_size * self.num_nodes, self.input_var) #(24, batch*num_nodes, input_var)
 
-            pm25 = inputs[:,:,0].unsqueeze(-1)
-            wind_vars = inputs[:,:,-2:] 
+            pm25 = inputs[:,:,0].unsqueeze(-1)  # PM2.5 (first variable)
+            wind_vars = inputs[:,:,-2:]  # u, v wind components (last 2 variables) 
             outputs, _ = self.gru_rnn(pm25) \
 
             last_output = outputs[-1]

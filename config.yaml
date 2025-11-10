@@ -12,8 +12,8 @@ data:
 model:
   seq_len: 24
   horizon: 24
-  input_var: 6
-  #['PM2.5', 'temperature', 'pressure', 'humidity', 'ws', 'wd']
+  input_var: 3
+  #['PM2.5', 'u', 'v'] - PM2.5 and wind components (u, v)
   input_dim: 1 
   output_dim: 1
   latent_dim: 4
